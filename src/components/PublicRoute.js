@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, Route } from "react-router";
+//import { useProfile } from "../context/profile.context";
 
-const PublicRoute = ({ ...routeProps }) => {
-  const profile = false;
+const PrivateRoute = ({ children, ...routeProps }) => {
+  const profile = useState();
   if (profile) {
     return <Navigate to="/" />;
   }
-  return <Route {...routeProps}></Route>;
+  return <Route {...routeProps}>{children}</Route>;
 };
 
-export default PublicRoute;
+export default PrivateRoute;
