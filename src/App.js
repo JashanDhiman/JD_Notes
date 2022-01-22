@@ -1,33 +1,20 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import PrivateRoute from "./components/PrivateRoute";
 import { ProfileProvider } from "./context/profile.context";
-//import PublicRouste from "./components/PublicRoute";
-import Home from "./home";
-import SignIn from "./signin";
+import Home from "./pages/home";
 
 function App() {
   return (
-    <ProfileProvider>
-      <Routes>
-        <Route
-          path="/signin"
-          element={
-            //<PublicRoute>
-            <SignIn />
-            //</PublicRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </ProfileProvider>
+    <ErrorBoundary>
+      <ProfileProvider>
+        <Routes>
+          <Route path="/" element={<PrivateRoute />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </ProfileProvider>
+    </ErrorBoundary>
   );
 }
 
