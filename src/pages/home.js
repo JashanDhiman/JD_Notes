@@ -1,15 +1,18 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import Notes from "../components/Notes";
-import Searchbar from "../components/Searchbar";
+import CreateNotes from "../components/notes/CreateNotes";
+import Notes from "../components/notes/Notes";
+//import Searchbar from "../components/Searchbar";
 import "../styles/notes.css";
 
 function Home() {
   return (
     <>
       <Navbar />
-      <Searchbar />
+      {/*<Searchbar />*/}
       <Notes />
+      <hr />
+      <CreateNotes />
     </>
   );
 }
