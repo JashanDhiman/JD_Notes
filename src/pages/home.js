@@ -9,9 +9,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      {/*<Searchbar />*/}
       <Notes />
-      <hr />
       <CreateNotes />
     </>
   );

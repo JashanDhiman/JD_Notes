@@ -32,32 +32,6 @@ const Notes = () => {
       ) : (
         isNotesEmpty && <h2>No Notes yet</h2>
       )}
-      {/*<div className="notes">
-        {canShowNotes &&
-          notes.map((msg) => (
-            <div className="note" key={msg.id}>
-              <div>{msg.Title}</div>
-              <div>{msg.Content}</div>
-            </div>
-          ))}
-      </div>*/}
-
-      <div className="container3">
-        <div className="open-note" id="open-note">
-          <div className="header">
-            <button value="jas" id="save">
-              Save
-            </button>
-            {"   "}
-            <button id="remove">Close</button>
-          </div>
-          <input type="text" id="topic" placeholder="Topic" />
-          <textarea
-            id="note-text"
-            placeholder="Write something here..."
-          ></textarea>
-        </div>
-      </div>
     </>
   );
 };

@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import firebase from "firebase/compat/app";
 import { database } from "../../misc/firebase";
 import { AiFillSave } from "react-icons/ai";
-import { IoIosCloseCircle, IoIosAddCircle } from "react-icons/io";
-//import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
 
-const CreateNotes = () => {
-  const [show, setShow] = useState(false);
-  //const [fav, setFav] = useState(false);
-  //const myFav =()=>
-
+const EditNote = (props) => {
+  //console.log(props);
+  const [show, setShow] = useState(true);
   const onSubmit = async () => {
     const Title = document.getElementById("topic").value;
     const Content = document.getElementById("note-text").value;
@@ -30,7 +27,7 @@ const CreateNotes = () => {
   };
   return (
     <>
-      {show ? (
+      {show && (
         <div id="container3">
           <div className="open-note" id="open-note">
             <div className="header">
@@ -55,22 +52,21 @@ const CreateNotes = () => {
                 {fav ? <MdOutlineFavoriteBorder /> : <MdOutlineFavorite />}
               </button>*/}
             </div>
-            <input id="topic" placeholder="Title" />
+            <input
+              id="topic"
+              placeholder="Title"
+              defaultValue={props.props.Title}
+            />
             <textarea
               id="note-text"
               placeholder="Write something here..."
+              defaultValue={props.props.Content}
             ></textarea>
           </div>
-        </div>
-      ) : (
-        <div id="create" onClick={() => setShow(true)}>
-          <span>
-            <IoIosAddCircle />
-          </span>
         </div>
       )}
     </>
   );
 };
 
-export default CreateNotes;
+export default EditNote;

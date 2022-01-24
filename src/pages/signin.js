@@ -1,6 +1,7 @@
 import React from "react";
 import firebase from "firebase/compat/app";
 import { auth, database } from "../misc/firebase";
+import { FcGoogle } from "react-icons/fc";
 
 const SignIn = () => {
   const signInWithProvider = async (provider) => {
@@ -26,6 +27,7 @@ const SignIn = () => {
 
   return (
     <div>
+      <FcGoogle />
       <button onClick={onGoogleSignIn}>Continue with Google</button>
     </div>
   );
