@@ -3,6 +3,7 @@ import firebase from "firebase/compat/app";
 import { database } from "../../misc/firebase";
 import { AiFillSave } from "react-icons/ai";
 import { IoIosCloseCircle, IoIosAddCircle } from "react-icons/io";
+import { toast } from "react-toastify";
 //import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 const CreateNotes = () => {
@@ -22,11 +23,11 @@ const CreateNotes = () => {
       try {
         await database.ref("profiles/notes").push(newNotesdata);
         setShow(false);
-        alert(`${Title} has been created.`, 4000);
+        toast.info(`${Title} has been created.`, 4000);
       } catch (err) {
-        alert(err.message, 4000);
+        toast.error(err.message, 4000);
       }
-    } else alert("Fill the provided fields.");
+    } else toast.error("Fill the provided fields.");
   };
   return (
     <>

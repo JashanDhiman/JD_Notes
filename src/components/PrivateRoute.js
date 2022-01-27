@@ -5,7 +5,6 @@ import SignIn from "../pages/signin";
 
 const PrivateRoute = () => {
   const profile = useProfile();
-  console.log(profile);
   return profile ? <Navigate to="/home" /> : <SignIn />;
 };
 

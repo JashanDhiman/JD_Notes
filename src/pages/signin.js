@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "firebase/compat/app";
 import { auth, database } from "../misc/firebase";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const signInWithProvider = async (provider) => {
@@ -15,9 +16,9 @@ const SignIn = () => {
         });
       }
 
-      alert("Signed in", 4000);
+      toast.success("Signed In");
     } catch (err) {
-      alert(err.message, 4000);
+      toast.error(err.message, 4000);
     }
   };
 
@@ -26,9 +27,13 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <FcGoogle />
-      <button onClick={onGoogleSignIn}>Continue with Google</button>
+    <div className="signin_div">
+      <div className="signinBtn" onClick={onGoogleSignIn}>
+        <div className="svg">
+          <FcGoogle />
+        </div>
+        <button>Continue with Google</button>
+      </div>
     </div>
   );
 };
