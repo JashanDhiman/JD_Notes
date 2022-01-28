@@ -5,7 +5,7 @@ import { AiFillSave } from "react-icons/ai";
 import { IoIosCloseCircle } from "react-icons/io";
 
 const EditNote = (props) => {
-  //console.log(props);
+  console.log(props);
   const [show, setShow] = useState(true);
   const onSubmit = async () => {
     const Title = document.getElementById("topic").value;

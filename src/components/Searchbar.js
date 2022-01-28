@@ -103,7 +103,7 @@ const Searchbar = (notes) => {
             </div>
           ))}
       </div>
-      {edit && <EditNote props={(edit, setEdit)} />}
+      {edit && <EditNote props={edit} />}
     </>
   );
 };
