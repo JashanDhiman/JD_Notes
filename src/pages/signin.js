@@ -16,7 +16,7 @@ const SignIn = () => {
         });
       }
 
-      toast.success("Signed In");
+      toast.success(`Welcome ${user.displayName}, You Successfully Signed In`);
     } catch (err) {
       toast.error(err.message, 4000);
     }

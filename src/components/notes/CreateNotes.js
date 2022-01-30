@@ -4,13 +4,10 @@ import { database } from "../../misc/firebase";
 import { AiFillSave } from "react-icons/ai";
 import { IoIosCloseCircle, IoIosAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
-//import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 const CreateNotes = () => {
+  const userNow = firebase.auth().currentUser;
   const [show, setShow] = useState(false);
-  //const [fav, setFav] = useState(false);
-  //const myFav =()=>
-
   const onSubmit = async () => {
     const Title = document.getElementById("topic").value;
     const Content = document.getElementById("note-text").value;
@@ -21,11 +18,11 @@ const CreateNotes = () => {
         Content,
       };
       try {
-        await database.ref("profiles/notes").push(newNotesdata);
+        await database.ref(`profiles/${userNow.uid}/notes`).push(newNotesdata);
         setShow(false);
-        toast.info(`${Title} has been created.`, 4000);
+        toast.success(`${Title} has been created.`);
       } catch (err) {
-        toast.error(err.message, 4000);
+        toast.error(err.message);
       }
     } else toast.error("Fill the provided fields.");
   };
@@ -52,9 +49,6 @@ const CreateNotes = () => {
               >
                 <IoIosCloseCircle />
               </button>
-              {/*<button id="fav" className="icon" onClick={myFav}>
-                {fav ? <MdOutlineFavoriteBorder /> : <MdOutlineFavorite />}
-              </button>*/}
             </div>
             <input id="topic" placeholder="Title" />
             <textarea

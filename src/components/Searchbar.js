@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import EditNote from "./notes/EditNote";
+import firebase from "firebase/compat/app";
+import { database } from "../misc/firebase";
+import { AiFillSave } from "react-icons/ai";
+import { IoIosCloseCircle } from "react-icons/io";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { toast } from "react-toastify";
 
+let dataStorage = 0;
 const Searchbar = (notes) => {
   const [query, setQuery] = useState("");
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState(false);
+  const userNow = firebase.auth().currentUser;
   var random_margin = [
     "1px",
     "2px",
@@ -40,8 +47,6 @@ const Searchbar = (notes) => {
     "#6495ED",
   ];
   var random_degree = [
-    "rotate(7deg)",
-    "rotate(6deg)",
     "rotate(5deg)",
     "rotate(4deg)",
     "rotate(3deg)",
@@ -56,6 +61,31 @@ const Searchbar = (notes) => {
     "rotate(-6deg)",
     "rotate(-7deg)",
   ];
+  const handleEditNote = (noteData) => {
+    dataStorage = noteData;
+    setEdit(true);
+  };
+  const trashItem = (id) => {
+    database.ref(`profiles/${userNow.uid}/notes/${id}`).remove();
+    console.log(id);
+  };
+  const onSubmit = async () => {
+    const newTitle = document.getElementById("topic").value;
+    const newContent = document.getElementById("note-text").value;
+    if (newTitle && newContent) {
+      try {
+        const updateNoteRef = database.ref(
+          `profiles/${userNow.uid}/notes/${dataStorage.id}`
+        );
+        updateNoteRef.child("Title").set(newTitle);
+        updateNoteRef.child("Content").set(newContent);
+        setEdit(false);
+        toast.success(`${newTitle} has been Updated.`);
+      } catch (err) {
+        toast.error(err.message, 4000);
+      }
+    } else toast.error("Fill the provided fields.");
+  };
   return (
     <>
       <div className="search_box">
@@ -81,7 +111,6 @@ const Searchbar = (notes) => {
           .map((post) => (
             <div
               className="note"
-              onClick={() => setEdit(post)}
               key={post.id}
               style={{
                 backgroundColor:
@@ -99,11 +128,46 @@ const Searchbar = (notes) => {
               }}
             >
               <div className="title">{post.Title}</div>
-              <div>{post.Content}</div>
+              <div className="trash" onClick={() => trashItem(post.id)}>
+                <FaTrashAlt />
+              </div>
+              <div className="edit" onClick={() => handleEditNote(post)}>
+                <FaEdit />
+              </div>
+              <div className="content">{post.Content}</div>
             </div>
           ))}
       </div>
-      {edit && <EditNote props={edit} />}
+      {edit && (
+        <div id="container3">
+          <div className="open-note" id="open-note">
+            <div className="header">
+              <button id="save" className="icon" onClick={onSubmit}>
+                <AiFillSave />
+              </button>
+              {"   "}
+              <button
+                id="remove"
+                className="icon"
+                onClick={() =>
+                  window.confirm(
+                    "Really want to close ?\nIt leads to loss of data of this note."
+                  )
+                    ? setEdit(false)
+                    : null
+                }
+              >
+                <IoIosCloseCircle />
+              </button>
+            </div>
+            <input id="topic" defaultValue={dataStorage.Title} />
+            <textarea
+              id="note-text"
+              defaultValue={dataStorage.Content}
+            ></textarea>
+          </div>
+        </div>
+      )}
     </>
   );
 };

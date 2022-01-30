@@ -4,8 +4,8 @@ import { database } from "../../misc/firebase";
 import { AiFillSave } from "react-icons/ai";
 import { IoIosCloseCircle } from "react-icons/io";
 
-const EditNote = (props) => {
-  console.log(props);
+const EditNote = (noteData) => {
+  //console.log(props);
   const [show, setShow] = useState(true);
   const onSubmit = async () => {
     const Title = document.getElementById("topic").value;
@@ -55,12 +55,12 @@ const EditNote = (props) => {
             <input
               id="topic"
               placeholder="Title"
-              defaultValue={props.props.Title}
+              //defaultValue={props.props.Title}
             />
             <textarea
               id="note-text"
               placeholder="Write something here..."
-              defaultValue={props.props.Content}
+              //defaultValue={props.props.Content}
             ></textarea>
           </div>
         </div>

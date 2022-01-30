@@ -29,6 +29,7 @@ a {
 }
 .title {
   text-transform: capitalize;
+  font-weight: 700;
 }
 button {
   outline: none;
@@ -161,19 +162,18 @@ button {
   border-radius: 5px;
   padding: 0.5rem;
   overflow: hidden;
-  cursor: pointer;
   border: 2px solid black;
-  /*box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
     rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
-    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;*/
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.note:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  /*box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;*/
 }
 .header {
   font-size: 1.2rem;
@@ -181,16 +181,11 @@ button {
   background-color: transparent;
 }
 .content {
-  height: 80%;
-  overflow: hidden;
   width: 95%;
-  margin: 6px;
-  background-color: transparent;
-  resize: none;
-  border: none;
+  margin: auto;
   text-align: justify;
-  outline: none;
-  cursor: pointer;
+  height: 100%;
+  overflow: hidden;
 }
 #container3 {
   position: fixed;
@@ -232,6 +227,23 @@ button {
   outline: none;
   font-size: 1.8rem;
 }
+.trash {
+  position: fixed;
+  top: 4%;
+  left: 88%;
+  cursor: pointer;
+}
+.edit {
+  position: fixed;
+  top: 4%;
+  left: 77%;
+  cursor: pointer;
+}
+.trash:hover,
+.edit:hover {
+  border-bottom: 3px solid black;
+  transition: 0s;
+}
 ::-webkit-scrollbar {
   width: 2px;
 }
@@ -272,7 +284,6 @@ input:-webkit-autofill:active {
   color: white;
   font-size: large;
 }
-
 .signinBtn {
   position: relative;
   z-index: 0;
@@ -296,7 +307,6 @@ input:-webkit-autofill:active {
     linear-gradient(#377af5, #377af5);
   animation: rotate 6s linear infinite;
 }
-
 .signinBtn ::after {
   content: "";
   position: absolute;
