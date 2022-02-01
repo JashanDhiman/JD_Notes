@@ -67,7 +67,6 @@ const Searchbar = (notes) => {
   };
   const trashItem = (id) => {
     database.ref(`profiles/${userNow.uid}/notes/${id}`).remove();
-    console.log(id);
   };
   const onSubmit = async () => {
     const newTitle = document.getElementById("topic").value;
