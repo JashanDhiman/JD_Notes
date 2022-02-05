@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import firebase from "firebase/compat/app";
 import { database } from "../misc/firebase";
@@ -127,7 +127,14 @@ const Searchbar = (notes) => {
               }}
             >
               <div className="title">{post.Title}</div>
-              <div className="trash" onClick={() => trashItem(post.id)}>
+              <div
+                className="trash"
+                onClick={() =>
+                  window.confirm(`Really want to Delete ${post.Title}?`)
+                    ? trashItem(post.id)
+                    : null
+                }
+              >
                 <FaTrashAlt />
               </div>
               <div className="edit" onClick={() => handleEditNote(post)}>
@@ -136,39 +143,39 @@ const Searchbar = (notes) => {
               <div className="content">{post.Content}</div>
             </div>
           ))}
-      </div>
-      {edit && (
-        <div id="container3">
-          <div className="open-note" id="open-note">
-            <div className="header">
-              <button id="save" className="icon" onClick={onSubmit}>
-                <AiFillSave />
-              </button>
-              {"   "}
-              <button
-                id="remove"
-                className="icon"
-                onClick={() =>
-                  window.confirm(
-                    "Really want to close ?\nIt leads to loss of data of this note."
-                  )
-                    ? setEdit(false)
-                    : null
-                }
-              >
-                <IoIosCloseCircle />
-              </button>
+        {edit && (
+          <div id="container3">
+            <div className="open-note" id="open-note">
+              <div className="header">
+                <button id="save" className="icon" onClick={onSubmit}>
+                  <AiFillSave />
+                </button>
+                {"   "}
+                <button
+                  id="remove"
+                  className="icon"
+                  onClick={() =>
+                    window.confirm(
+                      "Really want to close ?\nIt leads to loss of data of this note."
+                    )
+                      ? setEdit(false)
+                      : null
+                  }
+                >
+                  <IoIosCloseCircle />
+                </button>
+              </div>
+              <input id="topic" defaultValue={dataStorage.Title} />
+              <textarea
+                id="note-text"
+                defaultValue={dataStorage.Content}
+              ></textarea>
             </div>
-            <input id="topic" defaultValue={dataStorage.Title} />
-            <textarea
-              id="note-text"
-              defaultValue={dataStorage.Content}
-            ></textarea>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };
 
-export default Searchbar;
+export default memo(Searchbar);
