@@ -1,6 +1,8 @@
 # Live Demo link: 
 https://jd-notes.firebaseapp.com/
 
+![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=JashanDhiman&show_icons=true)
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
